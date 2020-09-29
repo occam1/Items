@@ -15,12 +15,12 @@ namespace WebApplication1.Services
 {
     public class ItemService : IItemService
     {
-        private readonly ILogger<ItemService> _logger;
-        private readonly ILoggerFactory _loggerFactory;
+        //private readonly ILogger<ItemService> _logger;
+        //private readonly ILoggerFactory _loggerFactory;
         private readonly IDbContext _dbContext;
-        public ItemService(ILogger logger, ILoggerFactory loggerFactory, IDbContext dbContext)
+        public ItemService( IDbContext dbContext)
         {
-            _loggerFactory = loggerFactory;
+           // _loggerFactory = loggerFactory;
             _dbContext = dbContext;
 
         }

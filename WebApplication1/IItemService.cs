@@ -6,7 +6,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1
 {
-    interface IItemService
+  public  interface IItemService
     {
         Task<List<Item>> GetItems();
         Task<int> InsertItem(Item newItem);

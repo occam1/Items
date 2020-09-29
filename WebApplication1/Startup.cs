@@ -14,9 +14,13 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Swashbuckle;
 
 using Data;
 using Data.Abstractions.Interfaces;
+using WebApplication1.Services;
+using WebApplication1.Models;
+using System.Resources;
 
 namespace WebApplication1
 {
@@ -33,23 +37,47 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var builder = services.AddMvcCore();
+
+            builder.AddAuthorization();
+            builder.AddFormatterMappings();
+            builder.AddCors();
+            services.AddMvcCore().AddApiExplorer();
 
             services.AddOptions();
             //services.ConfigureOptions(Configuration);
             services.Configure<ConnectionConfig>(Configuration.GetSection("DbSettings"))
               .AddTransient(cfg => cfg.GetService<IOptions<ConnectionConfig>>().Value);
-
+            services.AddSingleton(new ResourceManager(typeof(Item)));
             services.TryAddSingleton<ISqlPolicyRegistry, SqlPolicyRegistry>();
             services.TryAddScoped<SqlDataConnection>();
             services.AddTransient<IDbContext, DbContext>();
-
+            services.AddScoped<IItemService, ItemService>();
+            services.AddSwaggerGen();
 
         }
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, Microsoft.Extensions.Hosting.IHostApplicationLifetime appLifetime)
         {
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
         }
     }
+
 }
 
