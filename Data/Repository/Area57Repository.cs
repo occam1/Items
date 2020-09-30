@@ -37,7 +37,8 @@ namespace Data.Repository
         public async Task<int> InsertItem(Item newItem, CancellationToken cancellationToken = default)
         {
             var result = await _connection.SaveExecuteAsync<SqlConnection>(
-             sql: "dbo.sp_insertItem", param: newItem, commandType: CommandType.StoredProcedure,
+             sql: "dbo.sp_insertItem", param: newItem,        
+             commandType: CommandType.StoredProcedure,
                 cancellationToken: cancellationToken) ;
 
      
