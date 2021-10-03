@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
         /// <param name="PricingPlanId">The pricing plan you want to use </param>
         /// <param name="IsAvailable">Is the item available for sell right now?</param>
         /// <returns>long</returns>
-        [HttpGet("InsertItem")]
+        [HttpPost("InsertItem")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItem(long dealerId, string name, string description, string manufacturer,
             string manufacturingLine, string keywords, decimal cost, decimal currentPrice, decimal minimumPrice,
@@ -97,7 +97,7 @@ namespace WebApplication1.Controllers
         /// <param name="PricingPlanId">The pricing plan you want to use </param>
         /// <param name="IsAvailable">Is the item available for sell right now?</param>
         /// <returns>long</returns>
-        [HttpGet("InsertItemByContainer")]
+        [HttpPost("InsertItemByContainer")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItemByContainer(long dealerId, long containerId, string name, string description, string manufacturer,
             string manufacturingLine, string keywords, decimal cost, decimal currentPrice, decimal minimumPrice,
@@ -132,7 +132,7 @@ namespace WebApplication1.Controllers
         /// <param name="caption2">Additional caption if needed</param>
         /// <param name="path"> Relative path to the picture</param>
         /// <returns>long</returns>
-        [HttpGet("InsertItemPicture")]
+        [HttpPost("InsertItemPicture")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItemPicture(long dealerId, long itemId, string altText, 
             string caption1, string caption2, string path)        {
@@ -150,7 +150,6 @@ namespace WebApplication1.Controllers
             return Ok(result);
         }
 
-        Task<long> AssignItemPlace(ItemPlace newItemPlace, long currentUserId = 1);
         /// <summary>
         /// list all the items
         /// </summary>
@@ -160,7 +159,7 @@ namespace WebApplication1.Controllers
         /// <param name="SurfaceId">Display Surface/Shelf of Furniture - optional </param>
         /// <param name="SurfaceAreaId">Area on the Display Surface - optional</param>
         /// <returns>long</returns>
-        [HttpGet("AssignItemPlace")]
+        [HttpPost("AssignItemPlace")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> AssignItemPlace(long dealerId, long itemId, long furnitureId,
             long? surfaceId, long? surfaceAreaId)

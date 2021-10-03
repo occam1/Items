@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Models;
-using WebApplication1.Models;
 
 namespace Data.Abstractions.Interfaces
 {

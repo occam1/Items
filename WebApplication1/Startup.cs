@@ -15,11 +15,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Swashbuckle;
-
+using Common.Models;
 using Data;
 using Data.Abstractions.Interfaces;
 using WebApplication1.Services;
-using WebApplication1.Models;
 using System.Resources;
 
 namespace WebApplication1

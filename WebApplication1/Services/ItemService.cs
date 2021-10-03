@@ -10,7 +10,6 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using Data.Abstractions.Interfaces;
-using WebApplication1.Models;
 
 namespace WebApplication1.Services
 {
