@@ -3,29 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace Common.Models
 {
     public class Item
     {
-        public long Id{ get; }
-        public long DealerId { get; set; }
-        public string Name { get; set; }
-        public string Keywords { get; set; }
-        public string Description { get; set; }
-        public string Manufacturer { get; set; }
-        public string ManufacturingLine { get; set; }
-        public float Cost { get; set; }
-        public float CurrentPrice { get; set; }
-        public float MinimumPrice { get; set; }
-        public int PricingPlanId { get; set; }
-        public bool IsAvailable { get; set; }
-        public DateTime? SoldDate { get; set; }
-        public float SoldPrice { get; set; }
-        public bool Shippable { get; set; }
-        public long LocationId { get; set; }
-        public int Quantity { get; set; }
-
-
+        public long id{ get; }
+        public long dealerId { get; set; }
+        public string name { get; set; }
+        public string keywords { get; set; }
+        public string description { get; set; }
+        public string manufacturer { get; set; }
+        public string manufacturingLine { get; set; }
+        public decimal cost { get; set; }
+        public decimal currentPrice { get; set; }
+        public decimal minimumPrice { get; set; }
+        public int pricingPlanId { get; set; }
+        public bool isAvailable { get; set; }
+        public DateTime? soldDate { get; set; }
+        public decimal soldPrice { get; set; }
+        public bool isShippable { get; set; }
+        public long locationId { get;  set; }
+        public int quantity { get; set; }
 
     }
 }
