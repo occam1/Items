@@ -14,7 +14,7 @@ namespace Area57
         Task<ItemPlace> GetItemPlace(long dealerId, long itemId);
         Task<List<ItemPicture>> GetItemPictures(long dealerId, long itemId);
         Task<List<Container>> GetContainers(long dealerId);
-        Task<ContainerPlace> GetContainerPlaces(long dealerId, long containerId);
+        Task<ContainerPlace> GetContainerPlace(long dealerId, long containerId);
         Task<List<Item>> GetContainerItems(long dealerId, long containerId);
         Task<List<Furniture>> GetFurniture(long dealerId);
         Task<List<Surface>> GetSurfaces(long dealerId, long furnitureId);

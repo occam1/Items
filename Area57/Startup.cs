@@ -25,7 +25,7 @@ namespace Area57
 {
     public class Startup
     {
-        private static string ApiTitle = "DocSys Generation";
+        private static string ApiTitle = "Area57";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

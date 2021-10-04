@@ -49,9 +49,9 @@ namespace Area57.Services
         {
             return await _dbContext.Area57Repository.GetContainers(dealerId);
         }
-        public async Task<ContainerPlace> GetContainerPlaces(long dealerId, long containerId)
+        public async Task<ContainerPlace> GetContainerPlace(long dealerId, long containerId)
         {
-            return await _dbContext.Area57Repository.GetContainerPlaces(dealerId, containerId);
+            return await _dbContext.Area57Repository.GetContainerPlace(dealerId, containerId);
         }
         //public async Task<List<Item>> GetItemsByContainer( long containerId)
         //{

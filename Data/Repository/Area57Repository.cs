@@ -136,7 +136,7 @@ namespace Data.Repository
             }
         }
 
-        async Task<ContainerPlace> IArea57Repository.GetContainerPlaces(long dealerId, long containerId, CancellationToken cancellationToken)
+        async Task<ContainerPlace> IArea57Repository.GetContainerPlace(long dealerId, long containerId, CancellationToken cancellationToken)
         {
             try
             {

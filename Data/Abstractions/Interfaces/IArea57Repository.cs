@@ -18,7 +18,7 @@ namespace Data.Abstractions.Interfaces
         Task<ItemPlace> GetItemPlace(long dealerId, long itemId, CancellationToken cancellationToken = default);
         Task<List<ItemPicture>> GetItemPictures(long dealerId, long itemId, CancellationToken cancellationToken = default);
         Task<List<Container>> GetContainers(long dealerId, CancellationToken cancellationToken = default); 
-        Task<ContainerPlace> GetContainerPlaces(long dealerId, long containerId, CancellationToken cancellationToken = default);
+        Task<ContainerPlace> GetContainerPlace(long dealerId, long containerId, CancellationToken cancellationToken = default);
         Task<List<Item>> GetContainerItems(long dealerId, long containerId, CancellationToken cancellationToken = default);
         Task<List<Furniture>> GetFurniture(long dealerId, CancellationToken cancellationToken = default);
         Task<List<Surface>> GetSurfaces(long dealerId, long furnitureId, CancellationToken cancellationToken = default);
