@@ -52,10 +52,27 @@ namespace Data.Repository
         }
         public async Task<long> InsertItem(Item newItem, long currentUserId, CancellationToken cancellationToken = default)
         {
+            long? newItemId  = null;
             try
             {
                 var result = await _connection.SaveExecuteAsync<SqlConnection>(
-                 sql: "a57.sp_insertItem", param: new { newItem, currentUserId },
+                 sql: "a57.sp_insertItem", param: new { newItem.dealerId,
+                     newItem.name,
+                     newItem.keywords,
+                     newItem.description,
+                     newItem.manufacturer,
+                     newItem.manufacturingLine,
+                     newItem.cost,
+                     newItem.currentPrice,
+                     newItem.minimumPrice,
+                     newItem.pricingPlanId,
+                     newItem.isAvailable,
+                     newItem.soldDate,
+                     newItem.soldPrice,
+                     newItem.isShippable,
+                     newItem.quantity,
+                     currentUserId, 
+                     newItemId },
                  commandType: CommandType.StoredProcedure,
                     cancellationToken: cancellationToken);
                 return result;

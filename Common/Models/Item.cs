@@ -14,16 +14,15 @@ namespace Common.Models
         public string description { get; set; }
         public string manufacturer { get; set; }
         public string manufacturingLine { get; set; }
-        public decimal cost { get; set; }
-        public decimal currentPrice { get; set; }
-        public decimal minimumPrice { get; set; }
-        public int pricingPlanId { get; set; }
-        public bool isAvailable { get; set; }
+        public decimal? cost { get; set; }
+        public decimal? currentPrice { get; set; }
+        public decimal? minimumPrice { get; set; }
+        public int? pricingPlanId { get; set; }
+        public bool? isAvailable { get; set; }
         public DateTime? soldDate { get; set; }
-        public decimal soldPrice { get; set; }
-        public bool isShippable { get; set; }
-        public long locationId { get;  set; }
-        public int quantity { get; set; }
+        public decimal? soldPrice { get; set; }
+        public bool? isShippable { get; set; }
+        public int? quantity { get; set; }
 
     }
 }

@@ -21,3 +21,4 @@ C:\Users\mark_\source\repos\Area57\Data\obj\Debug\netcoreapp3.1\Data.csproj.Core
 C:\Users\mark_\source\repos\Area57\Data\obj\Debug\netcoreapp3.1\Data.csproj.CopyComplete
 C:\Users\mark_\source\repos\Area57\Data\obj\Debug\netcoreapp3.1\Data.dll
 C:\Users\mark_\source\repos\Area57\Data\obj\Debug\netcoreapp3.1\Data.pdb
+C:\Users\mark_\source\repos\Area57\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache

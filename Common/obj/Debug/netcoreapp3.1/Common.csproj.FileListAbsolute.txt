@@ -7,3 +7,12 @@ C:\Users\mark_\source\repos\WebApplication1\Common\obj\Debug\netcoreapp3.1\Commo
 C:\Users\mark_\source\repos\WebApplication1\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
 C:\Users\mark_\source\repos\WebApplication1\Common\obj\Debug\netcoreapp3.1\Common.dll
 C:\Users\mark_\source\repos\WebApplication1\Common\obj\Debug\netcoreapp3.1\Common.pdb
+C:\Users\mark_\source\repos\Area57\Common\bin\Debug\netcoreapp3.1\Common.deps.json
+C:\Users\mark_\source\repos\Area57\Common\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\mark_\source\repos\Area57\Common\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.csprojAssemblyReference.cache
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.dll
+C:\Users\mark_\source\repos\Area57\Common\obj\Debug\netcoreapp3.1\Common.pdb
