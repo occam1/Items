@@ -55,7 +55,7 @@ namespace Data.Repository
             try
             {
                 var result = await _connection.SaveExecuteAsync<SqlConnection>(
-                 sql: "a57.sp_insertItem", param: newItem,
+                 sql: "a57.sp_insertItem", param: new { newItem, currentUserId },
                  commandType: CommandType.StoredProcedure,
                     cancellationToken: cancellationToken);
                 return result;

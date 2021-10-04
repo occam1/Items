@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9MFEiIRa2nlZpl+IDJZ5/KXk7BAYiYdD/Jvt2fSgAQ/rANsUg5P/15/k7WdbfQWbmcKGtygBB9xI8YrupLkrgg==",
+  "dgSpecHash": "a9oPfJb06LmJwV/ENC1P79GogZ/7oTcC7efrlw/VEf0CNYc7F/GmSatQkcCzBZmOLpBPuuCkiO5OaCd/b2pYpg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj",
+  "projectFilePath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mark_\\.nuget\\packages\\dapper\\2.0.35\\dapper.2.0.35.nupkg.sha512",
     "C:\\Users\\mark_\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

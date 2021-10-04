@@ -4026,11 +4026,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj",
+      "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj",
       "projectName": "Common",
-      "projectPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj",
+      "projectPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj",
       "packagesPath": "C:\\Users\\mark_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\obj\\",
+      "outputPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mark_\\AppData\\Roaming\\NuGet\\NuGet.Config",

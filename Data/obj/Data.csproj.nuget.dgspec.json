@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Data\\Data.csproj": {}
+    "C:\\Users\\mark_\\source\\repos\\Area57\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj": {
+    "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj",
+        "projectPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\mark_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\obj\\",
+        "outputPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mark_\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -113,14 +113,14 @@
         }
       }
     },
-    "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Data\\Data.csproj": {
+    "C:\\Users\\mark_\\source\\repos\\Area57\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\mark_\\source\\repos\\Area57\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\mark_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Data\\obj\\",
+        "outputPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mark_\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -136,8 +136,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\mark_\\source\\repos\\WebApplication1\\Common\\Common.csproj"
+              "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj": {
+                "projectPath": "C:\\Users\\mark_\\source\\repos\\Area57\\Common\\Common.csproj"
               }
             }
           }
