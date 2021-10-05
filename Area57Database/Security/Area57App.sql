@@ -1,0 +1,3 @@
+﻿CREATE USER [Area57App] FOR LOGIN [Area57App]
+    WITH DEFAULT_SCHEMA = [default];
+
