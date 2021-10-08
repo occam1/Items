@@ -37,7 +37,7 @@ namespace Area57.Controllers
         /// </summary>
         /// <param name="Item"> Dealer ID</param>
         /// <returns>long</returns>
-    [Authorize]
+    //[Authorize]
         [HttpPost("InsertItem1")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(long), StatusCodes.Status401Unauthorized)]
