@@ -32,7 +32,6 @@ BEGIN
       ,[SoldDate]
       ,[SoldPrice]
       ,[IsShippable]
-      ,[LocationId]
       ,[Quantity]
 	  from [a57].Items
 	  where DealerId = @DealerId;

@@ -24,7 +24,7 @@ BEGIN
 	,[altText] 
 	,[Caption1]
 	,[Caption2]
-	,[Location]
+	,[Path]
 	,[CreatedBy] 
 	,[CreatedOn] 
 	,[ChangedBy] 

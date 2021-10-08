@@ -20,11 +20,16 @@ using Data;
 using Data.Abstractions.Interfaces;
 using Area57.Services;
 using System.Resources;
+using Application;
+using Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Area57
 {
     public class Startup
     {
+        public readonly string key = "This is my private key";
         private static string ApiTitle = "Area57";
         public Startup(IConfiguration configuration)
         {
@@ -39,15 +44,35 @@ namespace Area57
             var builder = services.AddMvcCore();
 
             builder.AddAuthorization();
+            
             builder.AddFormatterMappings();
             builder.AddCors();
             services.AddMvcCore().AddApiExplorer();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x=>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            })
+            ;
 
             services.AddOptions();
             //services.ConfigureOptions(Configuration);
             services.Configure<ConnectionConfig>(Configuration.GetSection("DbSettings"))
               .AddTransient(cfg => cfg.GetService<IOptions<ConnectionConfig>>().Value);
             services.AddSingleton(new ResourceManager(typeof(Item)));
+            
+            services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key));
             services.TryAddSingleton<ISqlPolicyRegistry, SqlPolicyRegistry>();
             services.TryAddScoped<SqlDataConnection>();
             services.AddTransient<IDbContext, DbContext>();
@@ -58,6 +83,7 @@ namespace Area57
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, Microsoft.Extensions.Hosting.IHostApplicationLifetime appLifetime)
         {
+            app.UseAuthentication();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

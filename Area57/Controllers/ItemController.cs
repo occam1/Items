@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Common.Models;
 using Area57.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Area57.Controllers
-{
+{ 
+    
     [ApiController]
     [Route("api/Item")]
     [Produces("application/json")]
@@ -30,6 +32,37 @@ namespace Area57.Controllers
         //https://localhost:44321/api/Item/GetItems
 
 
+        /// <summary>
+        /// list all the items
+        /// </summary>
+        /// <param name="Item"> Dealer ID</param>
+        /// <returns>long</returns>
+    [Authorize]
+        [HttpPost("InsertItem1")]
+        [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(long), StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> InsertItem1([FromBody]Item tmp)
+        {
+            Item newItem = new Item()
+            {
+                dealerId = tmp.dealerId,
+                name = tmp.name,
+                description = tmp.description,
+                manufacturer = tmp.manufacturer,
+                manufacturingLine = tmp.manufacturingLine,
+                keywords = tmp.keywords,
+                cost = tmp.cost,
+                currentPrice = tmp.currentPrice,
+                minimumPrice = tmp.minimumPrice,
+                pricingPlanId = tmp.pricingPlanId,
+                quantity = tmp.quantity,
+                isAvailable = tmp.isAvailable,
+                isShippable = tmp.isShippable
+            };
+
+            var result = await _itemService.InsertItem(newItem);
+            return Ok(result);
+        }
 
         /// <summary>
         /// list all the items
