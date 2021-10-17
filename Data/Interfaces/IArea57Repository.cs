@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Models;
 
-namespace Data.Abstractions.Interfaces
+namespace Data.Interfaces
 {
     public interface IArea57Repository
     {
@@ -20,6 +20,9 @@ namespace Data.Abstractions.Interfaces
         Task<List<Container>> GetContainers(long dealerId, CancellationToken cancellationToken = default); 
         Task<ContainerPlace> GetContainerPlace(long dealerId, long containerId, CancellationToken cancellationToken = default);
         Task<List<Item>> GetContainerItems(long dealerId, long containerId, CancellationToken cancellationToken = default);
+        Task<List<RoleLocation>> GetRoleLocationsByPersonId(long personId, CancellationToken cancellationToken = default);
+        //Task<long> GetPersonIdByUserName(string username,  CancellationToken cancellationToken = default);
+        Task<long> GetPersonIdByUserNamePassword(string username, string password, CancellationToken cancellationToken = default);
         Task<List<Furniture>> GetFurniture(long dealerId, CancellationToken cancellationToken = default);
         Task<List<Surface>> GetSurfaces(long dealerId, long furnitureId, CancellationToken cancellationToken = default);
         Task<List<SurfaceArea>> GetSurfaceAreas(long dealerId, long furnitureId, long surfaceId, CancellationToken cancellationToken = default);
@@ -30,6 +33,7 @@ namespace Data.Abstractions.Interfaces
         Task<long> InsertContainer(Container newContainer, long currentUserId, CancellationToken cancellationToken = default);
         Task<long> AssignContainerPlace(ContainerPlace newContainerPlace, long currentUserId, CancellationToken cancellationToken = default);
         Task<long> AssignItemToContainer(ContainerItem newContainerItem, long currentUserId, CancellationToken cancellationToken = default);
+        //Task<byte[]> getSalt(long personId, CancellationToken cancellationToken);
         //Task<long> InsertFurniture(Item newItem, CancellationToken cancellationToken = default);
         //Task<long> InsertSurface(Item newItem, CancellationToken cancellationToken = default);
         //Task<long> InsertSurfaceArea(Item newItem, CancellationToken cancellationToken = default);

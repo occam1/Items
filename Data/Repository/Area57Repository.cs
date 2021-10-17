@@ -1,16 +1,18 @@
 ﻿using Common.Models;
-using Data.Abstractions;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Konscious.Security.Cryptography;
+using Dapper;
 
 namespace Data.Repository
 {
@@ -27,7 +29,7 @@ namespace Data.Repository
         }
 
 
-    public async Task<List<Item>> GetItems(CancellationToken cancellationToken = default)
+        public async Task<List<Item>> GetItems(CancellationToken cancellationToken = default)
         {
 
             var itemList = await _connection.GetAsync<Item, SqlConnection>(
@@ -186,7 +188,115 @@ namespace Data.Repository
 
             }
         }
+        public async Task<List<RoleLocation>> GetRoleLocationsByPersonId(long personId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var rll = await _connection.GetAsync<RoleLocation, SqlConnection>(
+                sql: "a57.sp_getRoleLocations_by_PersonId", param: new { PersonId = personId },
+                    commandType: CommandType.StoredProcedure,
+                 cancellationToken: cancellationToken);
 
+                return rll.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private async Task<long> GetPersonIdByUserName(string userName,  CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                
+                //var p = new DynamicParameters();
+                //p.Add("@UserName", userName);
+                //p.Add("@personId", dbType: DbType.Int64, direction: ParameterDirection.Output);
+
+                long personId = await _connection.GetFirstOrDefaultAsync<int, SqlConnection>(
+                 sql: "a57.sp_GetPersonId_by_UserName", param: new { UserName = userName },
+                     commandType: CommandType.StoredProcedure,
+                     cancellationToken: cancellationToken);
+
+                return personId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+        public async Task<long> GetPersonIdByUserNamePassword(string userName, string password, CancellationToken cancellationToken=default)
+        {
+                long personId = 0;
+            //var p = new DynamicParameters();
+            //p.Add("@UserName", userName);
+            //p.Add("@Password", password);
+            //p.Add("@personId", dbType: DbType.Int64, direction: ParameterDirection.Output);
+            try
+            {
+                personId = await GetPersonIdByUserName(userName, cancellationToken);
+                byte[] salt = await GetSalt(personId, cancellationToken);
+                var passwordHash = Convert.ToBase64String(HashPassword(password, salt));
+                personId = await _connection.GetFirstOrDefaultAsync<long, SqlConnection>(
+                 sql: "a57.sp_GetPersonId_by_UserName_Password", param: new { 
+                     UserName = userName
+                   ,PasswordHash = passwordHash
+                 },
+                 commandType: CommandType.StoredProcedure,
+                     cancellationToken: cancellationToken); 
+                
+                return personId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+        private byte[] CreateSalt()
+        {
+            var buffer = new byte[16];
+            var rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(buffer);
+            return buffer;
+        }
+        private async Task<byte[]> GetSalt(long personId,  CancellationToken cancellationToken)
+        {
+            try
+            {
+                string b64 = await _connection.GetFirstOrDefaultAsync<string, SqlConnection>(
+                sql: "a57.sp_getDocument_By_PersonId", param: new { PersonId = personId },
+                    commandType: CommandType.StoredProcedure,
+                 cancellationToken: cancellationToken);
+                byte[] baSalt = Convert.FromBase64String(b64);
+                return baSalt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private byte[] HashPassword(string password, byte[] salt)
+        {
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
+
+            argon2.Salt = salt;
+            argon2.DegreeOfParallelism = 8; // four cores
+            argon2.Iterations = 4;
+            argon2.MemorySize = 1024 * 1024; // 1 GB
+
+            return  argon2.GetBytes(16);
+
+            /*
+             TABLE [a57].[Cart](
+            	[Id] [bigint] personId,
+	            [Orders] [bigint] NOT NULL, dop
+	            [Items] [bigint] NOT NULL, its
+	            [Dollars] money not null, 36Ccup
+                [Document] varBinary  nacl
+             */
+        }
         async Task<List<Furniture>> IArea57Repository.GetFurniture(long dealerId, CancellationToken cancellationToken)
         {
             try

@@ -1,4 +1,4 @@
-﻿namespace Application.Controllers
+﻿namespace Common.Models
 {
     public class UserCred
     {

@@ -5,7 +5,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
 namespace Data
 {

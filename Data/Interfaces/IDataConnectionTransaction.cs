@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.Abstractions.Interfaces
+namespace Data.Interfaces
 {
     /// <summary>
     ///     <para>

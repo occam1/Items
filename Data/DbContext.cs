@@ -1,4 +1,4 @@
-﻿using Data.Abstractions.Interfaces;
+﻿using Data.Interfaces;
 using Data.Repository;
 using Microsoft.Extensions.Logging;
 using System;

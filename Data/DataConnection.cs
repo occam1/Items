@@ -5,9 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
-namespace Data.Abstractions
+namespace Data
 {
     public abstract class DataConnection<T> : IDataConnection<T> where T : DbConnection
     {

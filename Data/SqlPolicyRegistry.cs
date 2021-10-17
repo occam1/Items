@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Registry;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
 namespace Data
 {

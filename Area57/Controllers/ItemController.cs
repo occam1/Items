@@ -8,18 +8,22 @@ using Microsoft.Extensions.Logging;
 using Common.Models;
 using Area57.Services;
 using Microsoft.AspNetCore.Authorization;
+using Application;
 
 namespace Area57.Controllers
-{ 
-    
+{  
     [ApiController]
     [Route("api/Item")]
     [Produces("application/json")]
     public class ItemController : ControllerBase
     {
-        private readonly IItemService _itemService;
-        public ItemController(IItemService itemService)
+        private readonly IItemService _itemService; 
+        public IJwtAuthenticationManager _jwtAuthenticationManager { get; }
+
+
+        public ItemController(IItemService itemService, IJwtAuthenticationManager jwtAuthenticationManager)
         {
+            _jwtAuthenticationManager = jwtAuthenticationManager;
             _itemService = itemService;
         }
         // GET api/values
@@ -37,7 +41,7 @@ namespace Area57.Controllers
         /// </summary>
         /// <param name="Item"> Dealer ID</param>
         /// <returns>long</returns>
-    //[Authorize]
+    [Authorize]
         [HttpPost("InsertItem1")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(long), StatusCodes.Status401Unauthorized)]
@@ -80,6 +84,7 @@ namespace Area57.Controllers
         /// <param name="Quantity">The number of identical items of similar quality</param>
         /// <param name="IsAvailable">Is the item available for sell right now?</param>
         /// <returns>long</returns>
+        [Authorize]
         [HttpPost("InsertItem")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItem(long dealerId, string name, string description, string manufacturer,
@@ -122,6 +127,7 @@ namespace Area57.Controllers
         /// <param name="PricingPlanId">The pricing plan you want to use </param>
         /// <param name="IsAvailable">Is the item available for sell right now?</param>
         /// <returns>long</returns>
+        [Authorize]
         [HttpPost("InsertItemByContainer")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItemByContainer(long dealerId, long containerId, string name, string description, string manufacturer,
@@ -157,6 +163,7 @@ namespace Area57.Controllers
         /// <param name="caption2">Additional caption if needed</param>
         /// <param name="path"> Relative path to the picture</param>
         /// <returns>long</returns>
+        [Authorize]
         [HttpPost("InsertItemPicture")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> InsertItemPicture(long dealerId, long itemId, string altText, 
@@ -184,6 +191,7 @@ namespace Area57.Controllers
         /// <param name="SurfaceId">Display Surface/Shelf of Furniture - optional </param>
         /// <param name="SurfaceAreaId">Area on the Display Surface - optional</param>
         /// <returns>long</returns>
+        [Authorize]
         [HttpPost("AssignItemPlace")]
         [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
         public async Task<IActionResult> AssignItemPlace(long dealerId, long itemId, long furnitureId,
@@ -203,19 +211,20 @@ namespace Area57.Controllers
         }
 
 
-      
 
 
-/// <summary>
-/// Create (insert) a new container
-/// </summary>
-/// <param name="DealerId" >Your Dealer ID</param>
-/// <param name="Name">Container Identifier</param>
-/// <param name="Description" >General description  </param>
-/// <param name="ContainerType">Material and form; plastic box, glass bowl etc </param>
-/// <returns>long</returns>
-[HttpPost("InsertContainer")]
-[ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
+
+        /// <summary>
+        /// Create (insert) a new container
+        /// </summary>
+        /// <param name="DealerId" >Your Dealer ID</param>
+        /// <param name="Name">Container Identifier</param>
+        /// <param name="Description" >General description  </param>
+        /// <param name="ContainerType">Material and form; plastic box, glass bowl etc </param>
+        /// <returns>long</returns>
+        [Authorize]
+        [HttpPost("InsertContainer")]
+        [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
 public async Task<IActionResult> InsertContainer(long dealerId, string name, string description,
  int containerType)
 {
@@ -230,18 +239,19 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
     var result = await _itemService.InsertContainer(newContainer);
     return Ok(result);
 }
-       
 
-      /// <summary>
-      /// assign a container to a place in some furniture
-      /// </summary>
-      /// <param name="DealerId" >Your Dealer ID</param>
-      /// <param name="ContainerId">Container ID</param>
-      /// <param name="FurnitureId" >Furniture where item is displayed</param>
-      /// <param name="SurfaceId">Display Surface/Shelf of Furniture - optional </param>
-      /// <param name="SurfaceAreaId">Area on the Display Surface - optional</param>
-      /// <returns>long</returns>
-      [HttpPost("InsertContainerPlace")]
+
+        /// <summary>
+        /// assign a container to a place in some furniture
+        /// </summary>
+        /// <param name="DealerId" >Your Dealer ID</param>
+        /// <param name="ContainerId">Container ID</param>
+        /// <param name="FurnitureId" >Furniture where item is displayed</param>
+        /// <param name="SurfaceId">Display Surface/Shelf of Furniture - optional </param>
+        /// <param name="SurfaceAreaId">Area on the Display Surface - optional</param>
+        /// <returns>long</returns>
+        [Authorize]
+        [HttpPost("InsertContainerPlace")]
       [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
       public async Task<IActionResult> AssignContainerPlace(long dealerId, long containerId, long furnitureId,
           long surfaceId, long surfaceAreaId)
@@ -259,15 +269,16 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
           return Ok(result);
       }
 
-       
-             /// <summary>
-             /// Assign an item to a container
-             /// </summary>
-             /// <param name="DealerId" >Your Dealer ID</param>
-             /// <param name="ContainerId">Container Identifier</param>
-             /// <param name="ItemId" >Item to assign to the container  </param>
-             /// <returns>long</returns>
-             [HttpPost("AssignItemToContainer")]
+
+        /// <summary>
+        /// Assign an item to a container
+        /// </summary>
+        /// <param name="DealerId" >Your Dealer ID</param>
+        /// <param name="ContainerId">Container Identifier</param>
+        /// <param name="ItemId" >Item to assign to the container  </param>
+        /// <returns>long</returns>
+        [Authorize]
+        [HttpPost("AssignItemToContainer")]
              [ProducesResponseType(typeof(long), StatusCodes.Status200OK)]
              public async Task<IActionResult> AssignItemToContainer(long dealerId, long containerId, long itemId
              )
@@ -282,27 +293,29 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
                  return Ok(result);
              }
 
-        
-             /// <summary>
-             /// list all the items
-             /// </summary>
-             /// <returns>Items</returns>
-             [HttpGet("GetItems")]
+
+        /// <summary>
+        /// list all the items
+        /// </summary>
+        /// <returns>Items</returns>
+        [AllowAnonymous]
+        [HttpGet("GetItems")]
              [ProducesResponseType(typeof(List<Item>), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetItems()
              {
                  var result = await _itemService.GetItems();
                  return Ok(result.ToList());
-             }  
+             }
 
 
-        
-             /// <summary>
-             /// list all the items
-             /// </summary>
-             /// <param name="Keywords" >Keywords describing items of interest - comma separated  </param>
-             /// <returns>Items</returns>
-             [HttpGet("GetItemsByKeyword")]
+
+        /// <summary>
+        /// list all the items
+        /// </summary>
+        /// <param name="Keywords" >Keywords describing items of interest - comma separated  </param>
+        /// <returns>Items</returns>
+        [AllowAnonymous]
+        [HttpGet("GetItemsByKeyword")]
              [ProducesResponseType(typeof(List<Item>), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetItemsByKeywords(string keywords)
              {
@@ -323,14 +336,16 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
               return Ok(result.ToList());
              }
 
-        
-             /// <summary>
-             /// get the location of an item
-             /// </summary>
-             /// <param name="DealerId" >Dealer ID </param>
-             /// <param name="DealerId" >Item ID </param>
-             /// <returns>Item Place</returns>
-             [HttpGet("GetItemPlace")]
+
+        /// <summary>
+        /// get the location of an item
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <param name="DealerId" >Item ID </param>
+        /// <returns>Item Place</returns>
+
+        [AllowAnonymous]
+        [HttpGet("GetItemPlace")]
              [ProducesResponseType(typeof(ItemPlace), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetItemsByPlace(long dealerId, long itemId)
              {
@@ -338,13 +353,14 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
               return Ok(result);
              }
 
-             /// <summary>
-             /// get the pictures of an item
-             /// </summary>
-             /// <param name="DealerId" >Dealer ID </param>
-             /// <param name="ItemId" >Item ID </param>
-             /// <returns>Item Place</returns>
-             [HttpGet("GetItemPictures")]
+        /// <summary>
+        /// get the pictures of an item
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <param name="ItemId" >Item ID </param>
+        /// <returns>Item Place</returns>
+        [AllowAnonymous]
+        [HttpGet("GetItemPictures")]
              [ProducesResponseType(typeof(List<ItemPicture>), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetItemPictures(long dealerId, long itemId)
              {
@@ -352,43 +368,46 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
               return Ok(result);
              }
 
-       
 
-             /// <summary>
-             /// get the containers belonging to a dealer
-             /// </summary>
-             /// <param name="DealerId" >Dealer ID </param>
-             /// <returns>Containers</returns>
-             [HttpGet("GetContainers")]
+
+        /// <summary>
+        /// get the containers belonging to a dealer
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <returns>Containers</returns>
+        [AllowAnonymous]
+        [HttpGet("GetContainers")]
              [ProducesResponseType(typeof(List<Container>), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetContainers(long dealerId)
              {
               var result = await _itemService.GetContainers(dealerId);
               return Ok(result);
              }
-       
-            /// <summary>
-            /// get the containers belonging to a dealer
-            /// </summary>
-            /// <param name="DealerId" >Dealer ID </param>
-            /// <param name="ContainerId">Container ID</param>
-            /// <returns>ContainerPlace</returns>
-            [HttpGet("GetContainerPlace")]
+
+        /// <summary>
+        /// get the containers belonging to a dealer
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <param name="ContainerId">Container ID</param>
+        /// <returns>ContainerPlace</returns>
+        [AllowAnonymous]
+        [HttpGet("GetContainerPlace")]
             [ProducesResponseType(typeof(ContainerPlace), StatusCodes.Status200OK)]
             public async Task<IActionResult> GetContainerPlace(long dealerId, long containerId)
             {
              var result = await _itemService.GetContainerPlace(dealerId, containerId);
              return Ok(result);
             }
-      
 
-           /// <summary>
-           /// get thebitems assigned to a container
-           /// </summary>
-           /// <param name="DealerId" >Dealer ID </param>
-           /// <param name="ContainerId">Container ID</param>
-           /// <returns>Items</returns>
-           [HttpGet("GetContainerItems")]
+
+        /// <summary>
+        /// get thebitems assigned to a container
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <param name="ContainerId">Container ID</param>
+        /// <returns>Items</returns>
+        [AllowAnonymous]
+        [HttpGet("GetContainerItems")]
            [ProducesResponseType(typeof(List<Item>), StatusCodes.Status200OK)]
            public async Task<IActionResult> GetContainerItems(long dealerId, long containerId)
            {
@@ -398,27 +417,31 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
 
 
 
-           /// <summary>
-           /// get the furniture belonging to a dealer
-           /// </summary>
-           /// <param name="DealerId" >Dealer ID </param>
-           /// <returns>Furniture</returns>
-           [HttpGet("GetFurniture")]
+        /// <summary>
+        /// get the furniture belonging to a dealer
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <returns>Furniture</returns>
+
+        [AllowAnonymous]
+        [HttpGet("GetFurniture")]
            [ProducesResponseType(typeof(List<Furniture>), StatusCodes.Status200OK)]
            public async Task<IActionResult> GetFurniture(long dealerId)
            {
             var result = await _itemService.GetFurniture(dealerId);
             return Ok(result);
            }
-       
-         //Task<List<Surface>> GetSurfaces(long dealerId, long furnitureId);
-         /// <summary>
-         /// get the display surfaces defined for the furniture
-         /// </summary>
-         /// <param name="DealerId" >Dealer ID </param>
-         /// <param name="FurnitureId">Container ID</param>
-         /// <returns>Surfaces</returns>
-         [HttpGet("GetSurfaces")]
+
+        //Task<List<Surface>> GetSurfaces(long dealerId, long furnitureId);
+        /// <summary>
+        /// get the display surfaces defined for the furniture
+        /// </summary>
+        /// <param name="DealerId" >Dealer ID </param>
+        /// <param name="FurnitureId">Container ID</param>
+        /// <returns>Surfaces</returns>
+
+        [AllowAnonymous]
+        [HttpGet("GetSurfaces")]
          [ProducesResponseType(typeof(ContainerPlace), StatusCodes.Status200OK)]
          public async Task<IActionResult> GetSurfaces(long dealerId, long furnitureId)
          {
@@ -426,7 +449,7 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
           return Ok(result);
          }
 
- 
+
         //Task<List<SurfaceArea>> GetSurfaceAreas(long dealerId, long fur
         /// <summary>
         /// get the areas into which a surface is divided
@@ -435,6 +458,8 @@ public async Task<IActionResult> InsertContainer(long dealerId, string name, str
         /// <param name="FurnitureId">Furniture ID</param>
         /// <param name="SurfaceId">Surface ID</param>
         /// <returns>SurfaceAreas</returns>
+
+        [AllowAnonymous]
         [HttpGet("GetSurfaceAreas")]
              [ProducesResponseType(typeof(List<SurfaceArea>), StatusCodes.Status200OK)]
              public async Task<IActionResult> GetSurfaceAreas(long dealerId, long furnitureId, long surfaceId)

@@ -20,7 +20,7 @@ using Data;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
 namespace Area57
 {

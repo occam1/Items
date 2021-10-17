@@ -9,7 +9,7 @@ using System.Data;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
 namespace Area57.Services
 {

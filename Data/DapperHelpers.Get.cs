@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
 namespace Data
 {

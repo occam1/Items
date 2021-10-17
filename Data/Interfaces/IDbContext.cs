@@ -8,7 +8,7 @@ using Serilog;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Data.Abstractions.Interfaces
+namespace Data.Interfaces
 {
     public interface IDbContext
     {

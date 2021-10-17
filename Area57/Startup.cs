@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Swashbuckle;
 using Common.Models;
 using Data;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 using Area57.Services;
 using System.Resources;
 using Application;
@@ -77,13 +77,14 @@ namespace Area57
             services.TryAddScoped<SqlDataConnection>();
             services.AddTransient<IDbContext, DbContext>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddSwaggerGen();
 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, Microsoft.Extensions.Hosting.IHostApplicationLifetime appLifetime)
         {
-            app.UseAuthentication();
+            
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -96,6 +97,9 @@ namespace Area57
             });
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

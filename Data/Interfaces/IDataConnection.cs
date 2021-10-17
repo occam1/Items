@@ -3,7 +3,7 @@ using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Data.Abstractions.Interfaces
+namespace Data.Interfaces
 {
     public interface IDataConnection<T> : IDisposable where T : IDbConnection
     {

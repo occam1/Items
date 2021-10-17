@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using Data.Abstractions.Interfaces;
+using Data.Interfaces;
 
-namespace Data.Abstractions
+namespace Data
 {
     public class DataConnectionTransaction<T> : IDataConnectionTransaction where T : DbConnection
     {

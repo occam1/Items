@@ -1,5 +1,4 @@
-﻿using Data.Abstractions;
-using Data.Abstractions.Interfaces;
+﻿using Data.Interfaces;
 using Microsoft.Extensions.Logging;
 using Polly.Registry;
 using Serilog.Core;

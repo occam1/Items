@@ -1,6 +1,6 @@
 ﻿using Polly;
 
-namespace Data.Abstractions.Interfaces
+namespace Data.Interfaces
 {
     public interface ISqlPolicyRegistry
     {
